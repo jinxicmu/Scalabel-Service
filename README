@@ -1,0 +1,68 @@
+
+This provides the classes needed for Project 3.
+
+The main classes (Cloud, ServerLib, Database, ClientSim) and the sample
+database file (db1.txt) are in the lib directory.  
+
+A sample server is provided in the sample directory.  To build this, ensure
+your CLASSPATH has the lib and sample directory included.  Then run make in 
+the sample directory.  
+
+To run the sample, try:
+	java Cloud 15440 ../lib/db1.txt c-2000-1 12
+This will launch the "Cloud" service, load the database with the items in 
+lib/db1.txt, and start simulating clients arriving at a constant rate every
+2000 ms.  A single instance of the sample Server will b erun as a "VM" 
+(actually a spearate process).  
+
+See the handout pdf for more details.
+
+export CLASSPATH=$PWD:$PWD/../lib
+
+java Cloud 15440 ../lib/db1.txt c-3333-15440 6 30 
+java Cloud 15440 ../lib/db1.txt  u-5000-6000-400 19 40
+java Cloud 15440 ../lib/db1.txt  e-400-111 4 40
+java Cloud 15440 ../lib/db1.txt u-100-400-15440 6 60
+
+java Cloud 15440 ../lib/db1.txt u-110-130-15440 6 60
+
+
+
+java Cloud 15440 ../lib/db1.txt c-835-15440 19 40
+java Cloud 15440 ../lib/db1.txt u-110-130-15440 20 60
+java Cloud 15440 ../lib/db1.txt c-760-15440,30,u-110-120-15440,30 18 60
+java Cloud 15440 ../lib/db1.txt c-160-15440,30,c-1000-15440,30 20 60
+case1:
+Stats: {purchased=23, dropped=5, ok=18, timeout=1}
+Total sales: 8805.051
+Total erroneous sales: 0.0
+VM 0 Ended
+VM 1 Ended
+VM 3 Ended
+VM 0 Output ----------------
+VM 1 Output ----------------
+Failed to create the RMI registry java.rmi.server.ExportException: Port already in use: 15440; nested exception is: 
+	java.net.BindException: Address already in use
+VM 2 Output ----------------
+VM 3 Output ----------------
+--------------------------
+Total VM time: 178526
+
+case2:
+Stats: {purchased=180, purchase_after_timeout=2, dropped=71, failed=1, ok=239, timeout=8}
+Total sales: 110384.82
+Total erroneous sales: 1764.36
+Total VM time: 872496
+
+case3:
+Stats: {purchased=110, dropped=52, ok=137, timeout=2} (upper limit is 70)
+Total sales: 54713.758
+Total erroneous sales: 0.0
+Total VM time: 562301
+
+case4:
+Stats: {purchased=73, dropped=47, failed=1, ok=95}
+Total sales: 35693.516
+Total erroneous sales: 0.0
+Total VM time: 483142
+
